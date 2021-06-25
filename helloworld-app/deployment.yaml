@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  namespace: default
+  labels:
+    app: helloworld-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: gcr.io/google_containers/echoserver:1.4
+        #image: docker.io/ayhanvural/helloworld-python
+        ports:
+        - containerPort: 11130
+        env:
+          - name: TARGET
+            value: "Python Sample v1"
